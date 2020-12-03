@@ -8,10 +8,10 @@ def read_from_split(path, split='\t'):
         res.append(data)
     return res
 
-def read_from_json(path,key = {}):
+def read_from_json(path,key = {},loc=0,split='\t'):
     res = []
     for lines in open(path):
-        data = json.loads(lines.strip())
-        res.append(res)
+        data = json.loads(lines.strip().split(split)[loc])
+        res.append(data)
     return res
 
