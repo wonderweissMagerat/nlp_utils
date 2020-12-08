@@ -4,15 +4,18 @@ import re
 
 
 class Preprocessor:
+    def __init__(self):
+        self.html_re = r'</?\w+[^>]*>'
+        self.reg = re.compile(self.html_re)
+    
     def rm_html(self, content):
-        html_re = r'</?\w+[^>]*>'
-        reg = re.compile(html_re)
-        content = reg.sub('',content)
+        content = self.reg.sub('',content)
         return content
 
 
 class Preprocessor_En(Preprocessor):
     def __init__(self):
+        super(Preprocessor_En,self).__init__()
         
         self.sen_split_type = 'nltk'
         self.word_tokenizer_type = None
