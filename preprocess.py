@@ -47,12 +47,15 @@ class Preprocessor_En(Preprocessor):
                 self.word_tokenizer = spacy.load('en_core_web_sm')
             doc = self.word_tokenizer(content)
             cur = [t.text for t in doc]
-            pat = '(\.|\?|-|:|&|/)'
+            pat = "(\.|\?|-|:|&|/|')"
             res = []
             for word in cur:
                 for span in re.split(pat,word):
                     if span != '' and span!= ' ' :
-                        res.append(span)
+                        if span in {'.','-'} and len(res)>0 and span in res[-1]:
+                            res[-1] = res[-1]+span
+                        else:
+                            res.append(span)
                         
         return ' '.join(res)
 
