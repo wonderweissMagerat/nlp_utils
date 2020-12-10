@@ -7,7 +7,7 @@ import json
 
 class TFIDF_Extractor:
     
-    def __init__(self, idfpath):
+    def __init__(self, idfpath='/mnt/nlp/big_sources/idf_unigram_top50w.dict'):
         self.idf = {}
         self.tfidf =[]
         self.vocab = {}
@@ -51,3 +51,4 @@ if __name__ == '__main__':
     print(tfidf_bow[1])
     tfidf_array = tfidf_tokenizer.to_array()
     print(sum(tfidf_array[1]))
+    

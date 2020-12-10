@@ -21,6 +21,8 @@ class Embedding:
                         +' and current word('+word+') is'+str(len(cur_embedding)))
             if word not in self.embedding:
                 self.embedding[word] = cur_embedding
+        
+
 
 if __name__ == '__main__':
     embedding = Embedding()
