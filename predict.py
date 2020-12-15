@@ -1,9 +1,9 @@
 import pickle
 import json
 
-def predict_ml(model_path,x,y,output_path,threshold=0.5,jd,key=[]):
+def predict_ml(model_path,x,y,output_path,jd,threshold=0.5,key=[]):
     model = pickle.load(open(model_path,'rb'))
-    class_ = model.class_
+    class_ = model.classes_
     vocab = dict(zip(class_,range(len(class_))))
     predict_pro = model.predict_proba(x)
     output = open(output_path,'w')

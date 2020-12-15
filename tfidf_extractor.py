@@ -7,11 +7,11 @@ import json
 
 class TFIDF_Extractor:
     
-    def __init__(self, idfpath='/mnt/nlp/big_sources/idf_unigram_top50w.dict'):
+    def __init__(self, idfpath='/mnt/nlp/big_sources/idf_unigram_top50w.dict',split = '\t'):
         self.idf = {}
         self.tfidf =[]
         self.vocab = {}
-        data = read_from_txt.read_from_split(idfpath)
+        data = read_from_txt.read_from_split(idfpath,split = split)
         for d in data:
             if d[0] not in self.idf:
                 self.idf[d[0]] = float(d[1])

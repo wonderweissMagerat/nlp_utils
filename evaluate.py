@@ -1,7 +1,7 @@
 import sys
 import numpy as np
 
-def run(path,label_vocab):
+def get_prf(path,label_vocab):
     t = 0 
     tp = 0 
     p = 0 

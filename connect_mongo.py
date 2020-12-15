@@ -50,7 +50,22 @@ def get_offline_from_url(url,key=['_id','url','stitle','seg_content']):
         return cur
     else:
         return None
-            
+
+def get_offline_from_docid(_id,key=['_id','url','stitle','seg_content']):
+    
+    '''
+    client = MongoClient('rs-offline.mongo.nb.com:27017', replicaset='rs-offline', \
+        readPreference='secondaryPreferred',unicode_decode_error_handler='ignore')['news']['data']
+    '''
+    client = MongoClient('172.31.27.159',27017,unicode_decode_error_handler='ignore')['news']['data']
+    jd = client.find_one({'_id':_id})
+    if jd!=None:
+        cur = {}
+        for k in key:
+            cur[k] = jd.get(k)
+        return cur
+    else:
+        return None           
 
 def get_staticfeature_from_docid(_id,key=['_id','url','stitle','seg_content']):
     client = MongoClient('172.31.29.170',27017,unicode_decode_error_handler='ignore')['staticFeature']['document']
@@ -83,9 +98,19 @@ def sample_highquality_from_offline(start_time, num, quality=[4,5],key=['_id','u
                 res.append(cur)
     return res      
         
+def get_staticfeature_from_url(url,key= ['_id','url','stitle','seg_content']):
+    offline_res  = get_offline_from_url(url,key = ['_id'])
+    res = {}
+    if offline_res !=None:
+        online_res = get_staticfeature_from_docid(offline_res['_id'],key = key)
+        if online_res !=None:
+            return online_res
+    return None
+
+
 
 if __name__ == '__main__':
-    sample_highquality_from_offline()
+    print(get_staticfeature_from_url('https://www.washingtonpost.com/podcasts/post-reports/the-attorney-generals-defense/'))#sample_highquality_from_offline()
     #get_staticfeature_from_docid(sys.argv[1])
     #get_offline_from_url(sys.argv[1])
     #get_highcheck()

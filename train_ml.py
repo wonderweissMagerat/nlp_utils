@@ -23,7 +23,7 @@ import pickle
 
 
 
-def fit_save(x,y,para = {},model_type = 'LR',model_path = 'cur.model'):
+def fit_save(x,y,model_type = 'LR',para = {},model_path = 'cur.model'):
     """
     训练与预测
     """
