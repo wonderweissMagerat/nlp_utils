@@ -28,7 +28,7 @@ def fit_save(x,y,model_type = 'LR',para = {},model_path = 'cur.model'):
     训练与预测
     """
     if model_type=='LR':
-        clf = linear_model.LogisticRegression(penalty=para['penalty'], C=para['C'], solver=para['solver'],class_weight='balanced')
+        clf = linear_model.LogisticRegression()
     if model_type=='SVM':
         clf = SVC()
     if model_type=='GBDT':
