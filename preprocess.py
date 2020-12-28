@@ -12,6 +12,8 @@ class Preprocessor:
         content = self.reg.sub('',content)
         return content
 
+    
+
 
 class Preprocessor_En(Preprocessor):
     def __init__(self):
@@ -20,6 +22,7 @@ class Preprocessor_En(Preprocessor):
         self.sen_split_type = 'nltk'
         self.word_tokenizer_type = None
         self.word_tokenizer = None 
+        self.sentence_splitter = None
 
     def tokenize(self, content, model='zzy'):
         if model == 'nltk':
@@ -61,7 +64,18 @@ class Preprocessor_En(Preprocessor):
                             res.append(span)
                         
         return ' '.join(res)
-
+    
+    def sentence_split(self, content):
+        if self.sentence_splitter == None:
+            import stanfordnlp
+            nlp = stanfordnlp.Pipeline(processors='tokenize', lang='en')
+            self.sentence_splitter = nlp
+        res = []
+        doc = self.sentence_splitter(content)
+        for sentence in doc.sentences:
+            sent = ' '.join([word.text for word in sentence.words])
+            res.append(sent)
+        return res
 
 
 if __name__ == '__main__':

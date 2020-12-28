@@ -16,7 +16,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import GridSearchCV,train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
-
+from sklearn.neural_network import MLPClassifier
 
 import pickle
 
@@ -28,7 +28,7 @@ def fit_save(x,y,model_type = 'LR',para = {},model_path = 'cur.model'):
     训练与预测
     """
     if model_type=='LR':
-        clf = linear_model.LogisticRegression()
+        clf = linear_model.LogisticRegression(max_iter=para.get('max_iter',100),class_weight = para.get('class_weight'))
     if model_type=='SVM':
         clf = SVC()
     if model_type=='GBDT':
@@ -37,6 +37,8 @@ def fit_save(x,y,model_type = 'LR',para = {},model_path = 'cur.model'):
         clf = RandomForestClassifier(n_estimators = para['n_estimators'])#n_estimators = para['n_estimators'],n_jobs=para['n_jobs'])#),min_samples_leaf=3)
     if model_type == 'GNB':
         clf = GaussianNB()#priors=para['priors'])
+    if model_type == 'MLP':
+        clf = MLPClassifier(hidden_layer_sizes= para.get('hidden_layer_sizes',(100,)),early_stopping=para.get('early_stopping',False))
     clf.fit(x,y)
     file=open(model_path,'wb')
     pickle.dump(clf,file,0)
