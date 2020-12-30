@@ -3,7 +3,7 @@ import json
 import numpy as np
 
 import embedding
-import tfidf_extractor
+from ml import tfidf_extractor
 import read_from_txt
 
 
