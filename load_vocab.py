@@ -7,7 +7,7 @@ def load_path_index(path):
     res = {}
     index = 0
     for data in lines:
-        if data[0] not in res:
+        if data[0] not in res and data[0]!='':
             res[data[0]] = index
             index +=1
     return res
