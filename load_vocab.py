@@ -12,8 +12,8 @@ def load_path_index(path):
             index +=1
     return res
 
-def load_path_value(path):
-    lines = read_from_txt.read_from_split(path)
+def load_path_value(path, split = '\t'):
+    lines = read_from_txt.read_from_split(path,split=split)
     res = {}
     for data in lines:
         if data[0] not in res and data[0]!='':
