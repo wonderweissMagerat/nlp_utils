@@ -17,7 +17,7 @@ from sklearn.model_selection import GridSearchCV,train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neural_network import MLPClassifier
-
+from sklearn.decomposition import LatentDirichletAllocation
 import pickle
 
 
@@ -39,6 +39,8 @@ def fit_save(x,y,model_type = 'LR',para = {},model_path = 'cur.model'):
         clf = GaussianNB()#priors=para['priors'])
     if model_type == 'MLP':
         clf = MLPClassifier(hidden_layer_sizes= para.get('hidden_layer_sizes',(100,)),early_stopping=para.get('early_stopping',False))
+    if model_type == 'LDA':
+        clf = LatentDirichletAllocation(n_components=para.get('n_components',10))
     clf.fit(x,y)
     file=open(model_path,'wb')
     pickle.dump(clf,file,0)
