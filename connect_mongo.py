@@ -110,7 +110,8 @@ def get_staticfeature_from_url(url,key= ['_id','url','stitle','seg_content']):
 
 
 if __name__ == '__main__':
-    print(get_staticfeature_from_url('https://www.washingtonpost.com/podcasts/post-reports/the-attorney-generals-defense/'))#sample_highquality_from_offline()
+    print(get_staticfeature_from_url('https://www.politico.com/states/new-york/city-hall/story/2021/01/29/cuomo-state-officials-maintain-they-never-misrepresented-nursing-home-deaths-9425293'))
+    #print(get_staticfeature_from_url('https://www.washingtonpost.com/podcasts/post-reports/the-attorney-generals-defense/'))#sample_highquality_from_offline()
     #get_staticfeature_from_docid(sys.argv[1])
     #get_offline_from_url(sys.argv[1])
     #get_highcheck()
